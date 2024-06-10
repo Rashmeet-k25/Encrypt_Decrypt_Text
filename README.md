@@ -1,80 +1,45 @@
 # Encrypt_Decrypt_Text
 Demonstrated encryption and decryption of text using Caesar Cipher technique with GUI.<br>
+This is a Python script that creates a graphical user interface (GUI) application using the Tkinter library. The application is a Caesar Cipher, a type of substitution cipher where each letter in the plaintext is 'shifted' a certain number of places down the alphabet.
 
-This Python code creates a graphical user interface (GUI) application for encrypting and decrypting text using the Caesar Cipher technique. Following is the break down of the code step by step:<br>
+Here's a breakdown of the code:
 
-*Importing Libraries:*<br>
-- **tkinter** is imported for creating the GUI.
-- **sys** is imported to check the platform (operating system).<br>
+*Importing modules:*
 
-*Defining the `CaesarCipher` Class:*<br>
-- The `CaesarCipher` class inherits from `tk.Frame`, which is a container widget in Tkinter.<br>
+The script starts by importing the tkinter module, which is used to create the GUI, and the sys module, which is used to determine the operating system.
 
-*Initialization:*<br>
-def __init__(self, root):
-- Initializes colors and letters for the cipher.
-- Calls the parent class (`tk.Frame`) initializer with a background color.
-- Sets up the main frame and calls `render_widgets` to create and place widgets.<br>
+*Defining the CaesarCipher class:*
 
-*Rendering Widgets:*<br>
-def render_widgets(self):
-- Creates and places all the widgets (labels, text area, buttons, and entry field) in the GUI.<br>
+The CaesarCipher class is defined, which inherits from tk.Frame. This class represents the main application window.
 
-*Creating the Title Label:*<br>
-self.title = tk.Label()
-- A label with the text "Caesar Cipher" is created and placed at the top of the mainframe.<br>
+*Initialization:*
 
-*Creating the Text Widget:*<br>
-self.text_widget = tk.Text()<br>
-self.text_widget.grid(column=0, row=1, padx=100)
-- A text widget for entering the text to be encrypted or decrypted.<br>
+The __init__ method is called when an instance of the CaesarCipher class is created. It sets up the application window with a background color, creates a main frame, and calls the render_widgets method to create the GUI components.
 
-*Creating the Key Label:*<br>
-self.key_label = tk.Label()<br>
-self.key_label.grid(column=0, row=2, pady=(38, 10))
-- A label for the key input with a description.<br>
+*Rendering widgets:*
 
-*Creating the Buttons Container:*<br>
-- A container to hold the Encrypt and Decrypt buttons along with the key entry field.<br>
+The render_widgets method creates the following GUI components:
 
-*Creating Encrypt and Decrypt Buttons:*<br>
-self.button_encrypt = tk.Button()<br>
-self.button_encrypt.grid(column=0, row=0, ipadx=5, ipady=5)<br>
-self.button_decrypt = tk.Button()<br>
-self.button_decrypt.grid(column=2, row=0, ipadx=5, ipady=5)<br>
-- Two buttons for encrypting and decrypting the text, initially disabled.<br>
+1. A title label with the text "Caesar Cipher"
+2. A text widget where the user can input the plaintext
+3. A label and entry field for the user to input the key (shift value)
+4. Two buttons: "Encrypt" and "Decrypt"
+5. A container frame to hold the buttons and key entry field
+   
+*Encrypt and decrypt methods:*
 
-*Creating the Key Entry Field:*<br>
-self.key_entry_validation_command = self.buttons_container.register(self.key_entry_validation)<br>
-self.key_entry = tk.Entry()<br>
-self.key_entry.grid(column=1, row=0, ipady=9)<br>
-- An entry field for the user to input the key, with validation to ensure it's within the correct range.<br>
+The encrypt_decrypt method takes three arguments: text, mode, and key. It performs the Caesar Cipher encryption or decryption based on the mode parameter ('e' for encryption, 'd' for decryption). The method shifts each letter in the input text by the key value, wrapping around the alphabet if necessary.
 
-*Caesar Cipher Logic:*<br>
-def encrypt_decrypt(self, text, mode, key):
-- Function to encrypt or decrypt the text based on the mode ('e' for encrypt, 'd' for decrypt) and the key.<be>
+*Key entry validation:*
 
-*Key Entry Validation:*<br>
-def key_entry_validation(self, value):
-- Validates the key entry and enables/disables the buttons accordingly.<br>
+The key_entry_validation method is called whenever the user inputs a value in the key entry field. It checks if the input is a valid integer between 1 and 25 (inclusive), and enables or disables the "Encrypt" and "Decrypt" buttons accordingly.
 
-*Encrypt and Decrypt Commands:*<br>
-def encrypt_command(self):<br>
-def decrypt_command(self):
-- Functions to handle encryption and decryption commands by getting the key and text, then updating the text widget with the result.<br>
+*Button command methods:*
 
-*Running the Application:*<br>
-operating_system = sys.platform<br>
-root = tk.Tk()<br>
-caesar_cipher_app = CaesarCipher(root)<br>
-root.title = 'Caesar Cipher'
-if 'win' in operating_system:<br>
-    root.geometry('800x450')<br>
-elif 'linux' in operating_system:<br>
-    root.geometry('800x470')<br>
-elif 'darwin' in operating_system:   <br>
-    root.geometry('800x470')<br>
-root.resizable(width=False, height=False)
-root.mainloop()
-- Detects the operating system and sets the window size accordingly.
-- Creates the main application window and runs the main loop.
+The encrypt_command and decrypt_command methods are called when the user clicks the "Encrypt" or "Decrypt" buttons, respectively. They retrieve the input text and key, perform the encryption or decryption using the encrypt_decrypt method, and update the text widget with the result.
+
+*Main script:*
+
+The main script creates an instance of the CaesarCipher class, sets the window title, and configures the window size and resizability based on the operating system. Finally, it starts the GUI event loop using root.mainloop().
+
+Overall, this script creates a GUI application that allows users to input plaintext and a key, and then encrypts or decrypts the text using the Caesar Cipher algorithm.
